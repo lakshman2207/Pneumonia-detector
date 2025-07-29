@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block title %}Contact | RadiantAI{% endblock %}
+{% block content %}
+<div class="max-w-xl mx-auto py-10">
+  <h2 class="text-3xl font-bold text-blue-700 mb-4">Get in Touch</h2>
+  <p class="text-gray-700 mb-6">Have questions or feedback? We'd love to hear from you.</p>
+
+  <form class="space-y-4">
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Name</label>
+      <input type="text" class="w-full border border-gray-300 rounded-lg p-2" placeholder="Your name">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Email</label>
+      <input type="email" class="w-full border border-gray-300 rounded-lg p-2" placeholder="you@example.com">
+    </div>
+    <div>
+      <label class="block text-sm font-medium text-gray-700">Message</label>
+      <textarea class="w-full border border-gray-300 rounded-lg p-2" rows="4" placeholder="Type your message..."></textarea>
+    </div>
+    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md">Send</button>
+  </form>
+</div>
+{% endblock %}

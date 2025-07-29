@@ -1,0 +1,54 @@
+{% extends "layout.html" %}
+{% block title %}About | RadiantAI{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto text-gray-800 py-10 space-y-8">
+
+  <h2 class="text-3xl font-bold text-blue-700">What is Pneumonia?</h2>
+  <p>
+    Pneumonia is an infection that inflames the air sacs in one or both lungs. The air sacs may fill with fluid or pus,
+    leading to symptoms like cough, fever, chills, and difficulty breathing. It can be caused by bacteria, viruses, or fungi.
+  </p>
+
+  <div>
+    <h3 class="text-xl font-semibold text-blue-600 mb-2">Causes & Risk Factors</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Bacteria: <em>Streptococcus pneumoniae</em></li>
+      <li>Viruses: Influenza, COVID-19</li>
+      <li>Fungi: In immunocompromised patients</li>
+      <li>High risk: Infants, elderly, smokers, people with chronic conditions</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold text-blue-600 mb-2">Common Symptoms</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>Chest pain when breathing or coughing</li>
+      <li>Persistent cough (may produce phlegm)</li>
+      <li>Fever, chills, sweating</li>
+      <li>Fatigue and shortness of breath</li>
+      <li>Nausea or vomiting</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold text-blue-600 mb-2">Types of Pneumonia</h3>
+    <p>There are different forms, such as:</p>
+    <ul class="list-disc list-inside space-y-1">
+      <li><strong>Community-acquired:</strong> From daily exposure</li>
+      <li><strong>Hospital-acquired:</strong> From prolonged stays or ventilators</li>
+      <li><strong>Aspiration:</strong> From inhaling food, liquid, or vomit</li>
+    </ul>
+  </div>
+
+  <div>
+    <h3 class="text-xl font-semibold text-blue-600 mb-2">How RadiantAI Helps</h3>
+    <p>
+      RadiantAI uses advanced AI and deep learning (CNNs) to detect pneumonia from chest X-ray images. Our Grad-CAM technology
+      shows you <strong>where</strong> the model is focusing to build trust and interpretability. It is designed to assist radiologists and
+      empower early diagnosis—not replace a medical expert.
+    </p>
+    <img src="/static/sample_heatmap.jpg" alt="AI Heatmap Example" class="w-96 mt-4 rounded shadow-md">
+  </div>
+
+</div>
+{% endblock %}
