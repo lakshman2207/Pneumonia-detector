@@ -5,9 +5,13 @@ import numpy as np
 import os
 import cv2
 import uuid
+import matplotlib.pyplot as plt
 from tf_keras_vis.gradcam import Gradcam
 from tf_keras_vis.utils.model_modifiers import ReplaceToLinear
 from tf_keras_vis.utils import normalize
+
+# Set dynamic port for Render or fallback to 10000 for local
+port = int(os.environ.get("PORT", 10000))
 
 # Ensure 'static' folder exists
 os.makedirs('static', exist_ok=True)
@@ -19,11 +23,6 @@ model = load_model('models/trained_model_pneumonia.h5')
 
 # Grad-CAM generation function
 def generate_gradcam(image_path, model, penultimate_layer='target_conv_layer'):
-    import matplotlib.pyplot as plt
-    from tf_keras_vis.utils.model_modifiers import ReplaceToLinear
-    from tf_keras_vis.gradcam import Gradcam
-    from tf_keras_vis.utils import normalize
-
     # Load and preprocess image
     img = load_img(image_path, target_size=(224, 224))
     original_img = np.array(img).astype('float32') / 255.0
@@ -40,13 +39,11 @@ def generate_gradcam(image_path, model, penultimate_layer='target_conv_layer'):
     # Generate Grad-CAM heatmap
     heatmap = gradcam(score, img_array, penultimate_layer=penultimate_layer)
     heatmap = normalize(heatmap[0])  # (224, 224)
+    heatmap = np.power(heatmap, 2.5)  # Enhance activations
 
-    # 🔥 Enhance focus: sharpen strong activations, fade weak ones
-    heatmap = np.power(heatmap, 2.5)  # raise activation contrast
-
-    # Apply colormap
-    jet_cmap = plt.cm.jet(heatmap)[..., :3]  # RGBA → RGB
-    overlay = np.clip(original_img + jet_cmap * 0.7, 0, 1)  # stronger blend
+    # Apply colormap and blend
+    jet_cmap = plt.cm.jet(heatmap)[..., :3]
+    overlay = np.clip(original_img + jet_cmap * 0.7, 0, 1)
 
     # Save overlay image
     filename = f'gradcam_overlay_{uuid.uuid4().hex}.png'
@@ -104,4 +101,4 @@ def contact():
 
 # Entry point
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=port)  # Works both locally and on Render
